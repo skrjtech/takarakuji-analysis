@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  takarakuji:
+    image: skrjtech/scraping:debian-python3.11.1
+    container_name: takarakuji
+    tty: true
+    restart: always
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ..:/ws
+      - pycharm_volume:/tmp/pycharm
+    shm_size: '1gb'
+  
+  pycharm:
+    image: skrjtech/pycharm:debian
+    container_name: pycharm_container
+    tty: true
+    restart: always
+    volumes:
+      - type: volume
+        source: pycharm_volume
+        target: /tmp/pycharm
+    depends_on:
+      - takarakuji
+
+volumes:
+  pycharm_volume:
