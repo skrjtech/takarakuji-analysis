@@ -68,11 +68,10 @@ class ProxyRotation(object):
             proxtable.to_pickle('../config/proxy.tbl')
 
         if proxlist is not None:
-
-
-
+            pass
+    
     def Update(self):
-        pass
+        return
 
 if __name__ == '__main__':
     # proxytable1 = ProxyTable()
